@@ -1,0 +1,11 @@
+#bandList {
+    width: 250px;
+    height: 100vh;
+    float: left;
+    border-right: 1px SOLID #BBBBBB;
+}
+
+#bandDetail {
+    width: calc(100vw - 255px);
+    float: right;
+}

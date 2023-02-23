@@ -1,0 +1,21 @@
+.ts {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 190px;
+    padding: 10px;
+    color: #FFF;
+    background-color: #4CAF50;
+    border-radius: 2px;
+    font-size: 10pt;
+    text-align: right;
+    z-index: 300;
+}
+
+.ts.warn {
+    background-color: #E2C50A;
+}
+
+.ts.ko {
+    background-color: #FF5252;
+}

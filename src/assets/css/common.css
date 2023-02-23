@@ -1,0 +1,35 @@
+* {
+    outline: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: #FFFFFF;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    text-align: center;
+    min-height: 100%;
+    position: relative;
+}
+
+form {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    border: 0;
+}
+
+table {
+    border: 0;
+    border-spacing: 0;
+}
+
+textarea {
+    resize: none;
+}

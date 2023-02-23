@@ -1,0 +1,27 @@
+{
+  "name": "ma-web",
+  "version": "0.0.1",
+  "description": "Metal Archives Web",
+  "private": true,
+  "authors": [
+    "Alan Dell'Onze <alan.dellonze@gmail.com>"
+  ],
+  "scripts": {
+    "clean": "gulp clean",
+    "serve": "gulp clean serve",
+    "build": "gulp clean build:all"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.24.4",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.4",
+    "gulp-concat": "^2.6.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-if": "^3.0.0",
+    "gulp-jsonminify": "^1.1.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-uglify": "^1.5.3",
+    "minimist": "^1.2.5"
+  }
+}

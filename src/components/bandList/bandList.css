@@ -1,0 +1,31 @@
+.bl-container input {
+    width: 90%;
+    padding: 3px;
+    margin: 6px 3px 3px 3px;
+}
+
+.bl-container .bl-input {
+    height: 40px;
+    background-color: darkcyan;
+}
+
+.bl-container .bl-scroll {
+    height: calc(100vh - 45px);
+    overflow: scroll;
+}
+
+.bl-container table {
+    width: 100%;
+}
+
+.bl-container table td {
+    text-align: left;
+    padding: 5px 0 5px 10px;
+    cursor: pointer;
+    border-bottom: 1px SOLID #BBBBBB;
+}
+
+.bl-container table td:hover {
+    background-color: #5F9EA0;
+    color: #FFFFFF;
+}
