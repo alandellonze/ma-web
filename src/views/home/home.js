@@ -2,17 +2,17 @@ const Home = {
 
   data: null,
 
-  _resetData: function () {
+  _resetData() {
     this.data = {};
   },
 
-  init: async function () {
+  async init() {
     // reset
     this._resetData();
 
     // create components
-    const bandList = new BandList('bandList');
-    const bandDetail = new BandDetail('bandDetail');
+    const bandList = new BandList('hmBandList');
+    const bandDetail = new BandDetail('hmBandDetail');
 
     // init bands
     await bandList.init(bandDetail);

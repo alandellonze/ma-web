@@ -1,5 +1,5 @@
 function Route(name, htmlName, handler) {
-  this.constructor(name, htmlName, handler);
+  this._constructor(name, htmlName, handler);
 }
 
 Route.prototype = {
@@ -9,13 +9,13 @@ Route.prototype = {
   handler: undefined,
   init: undefined,
 
-  constructor: function (name, htmlName, handler) {
+  _constructor(name, htmlName, handler) {
     this.name = name;
     this.htmlName = htmlName;
     this.handler = handler;
   },
 
-  isActiveRoute: function (hashedPath) {
+  isActiveRoute(hashedPath) {
     return hashedPath.replace('#', '') === this.name;
   }
 

@@ -1,11 +1,11 @@
 const ApiService = {
 
-  getBands: function (name) {
+  getBands(name) {
     return ApiUtil.getAsync('/bands?name=' + name);
   },
 
-  getBand: function (id) {
-    return ApiUtil.getAsync('/bands/' + id);
+  getDiff(bandId) {
+    return ApiUtil.getAsync('/diff/' + bandId);
   }
 
 };

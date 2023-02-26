@@ -1,11 +1,15 @@
-#bandList {
+.hm-container {
+    display: flex;
+}
+
+.hm-left {
     width: 250px;
     height: 100vh;
-    float: left;
     border-right: 1px SOLID #BBBBBB;
 }
 
-#bandDetail {
-    width: calc(100vw - 255px);
-    float: right;
+.hm-right {
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
 }

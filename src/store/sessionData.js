@@ -3,27 +3,27 @@ const sessionData = {
   _locale: 'en',
   _modalOpenedCount: 0,
 
-  getLocale: function () {
+  getLocale() {
     return this._locale;
   },
 
-  setLocale: function (locale) {
+  setLocale(locale) {
     this._locale = locale;
   },
 
-  getModalOpenedCount: function () {
+  getModalOpenedCount() {
     return this._modalOpenedCount;
   },
 
-  someModalIsOpen: function () {
+  someModalIsOpen() {
     return this._modalOpenedCount > 0;
   },
 
-  incModalOpenedCount: function () {
+  incModalOpenedCount() {
     this._modalOpenedCount++;
   },
 
-  decModalOpenedCount: function () {
+  decModalOpenedCount() {
     this._modalOpenedCount--;
     if (this._modalOpenedCount < 0) {
       this._modalOpenedCount = 0;

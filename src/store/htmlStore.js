@@ -2,7 +2,7 @@ const htmlStore = {
 
   cache: {},
 
-  get: function (key) {
+  get(key) {
     // load from server if not in the cache
     if (!this.cache[key]) {
       // load from the server

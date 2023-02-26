@@ -1,0 +1,21 @@
+#appOverlay1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.2;
+    filter: alpha(opacity=10);
+    z-index: 190;
+}
+
+#appOverlay2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../assets/images/overlay.gif) no-repeat 50% 50%;
+    z-index: 200;
+}

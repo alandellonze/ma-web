@@ -2,11 +2,11 @@ const labels = {
 
   _values: undefined,
 
-  init: function () {
+  init() {
     this._values = labelsStore.get(sessionData.getLocale());
   },
 
-  translateLabelsInPage: function () {
+  translateLabelsInPage() {
     const elements = util.allByAttribute('data-label');
     for (let i = 0; i < elements.length; i++) {
       const el = elements[i];
@@ -23,7 +23,7 @@ const labels = {
     }
   },
 
-  translate: function (text) {
+  translate(text) {
     let translation = '';
 
     const texts = text.split(' ');

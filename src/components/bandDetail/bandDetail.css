@@ -1,2 +1,10 @@
 .bd-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bd-container .bd-content {
+    display: flex;
+    justify-content: space-around;
 }

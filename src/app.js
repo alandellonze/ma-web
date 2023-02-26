@@ -1,6 +1,6 @@
 const app = {
 
-  init: function () {
+  init() {
     // init labels
     labels.init();
 
@@ -11,7 +11,7 @@ const app = {
     router.changePage(window.location.hash);
   },
 
-  keyPressListener: function (event) {
+  keyPressListener(event) {
     // when 'Enter' is pressed execute the route handler (if implemented)
     if (event.keyCode === 13) {
       const route = router.getCurrent();
@@ -30,6 +30,6 @@ window.onload = function () {
   app.init();
 };
 
-window.onkeypress = function (event) {
+window.onkeyup = function (event) {
   app.keyPressListener(event);
 };

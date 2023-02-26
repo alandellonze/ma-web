@@ -1,44 +1,53 @@
 function BandList(id) {
-  BandList.prototype._generate(id);
+  this._generate(id);
 }
 
 BandList.prototype = {
 
-  _generate: function (id) {
+  bandDetail: null,
+
+  _generate(id) {
     util.setValue(id, htmlStore.get('/components/bandList/bandList.html'));
+
+    // bind events
+    const self = this;
+    util.id('blFilter').onkeyup = async function () {
+      await self._loadBands();
+    };
   },
 
-  init: async function (bandDetail) {
-    // set band detail component
-    BandList.prototype.bandDetail = bandDetail;
+  async init(bandDetail) {
+    // set bandDetail component
+    this.bandDetail = bandDetail;
 
     // init bands
-    await BandList.prototype._loadBands();
+    await this._loadBands();
   },
 
-  _loadBands: async function () {
-    const bandsFilter = util.getValue('bandsFilter');
-    const bands = await ApiService.getBands(bandsFilter);
-    BandList.prototype._updateBands(bands);
+  async _loadBands() {
+    const filter = util.getValue('blFilter');
+    const bands = await ApiService.getBands(filter);
+    this._updateBands(bands);
   },
 
-  _updateBands: function (bands) {
+  _updateBands(bands) {
     // empty table
-    const table = util.emptyTable('bandsTable');
+    const table = util.emptyTable('blTable');
 
     // add rows
-    bands.forEach(band => BandList.prototype._addRow(table, band));
+    bands.forEach(band => this._addRow(table, band));
   },
 
-  _addRow: function (table, band) {
+  _addRow(table, band) {
+    const self = this;
     const tr = util.tr(table);
-    util.td(band.name, function () {
-      BandList.prototype._selectBand(band);
-    }, tr);
+    util.td(tr, band.name, null, function () {
+      self._selectBand(band);
+    });
   },
 
-  _selectBand: function (band) {
-    BandList.prototype.bandDetail.update(band);
+  _selectBand(band) {
+    this.bandDetail.update(band);
   }
 
 };

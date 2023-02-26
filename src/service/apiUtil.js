@@ -11,23 +11,23 @@ const ApiUtil = {
     DELETE: 'DELETE'
   },
 
-  get: function (uriPath, body) {
+  get(uriPath, body) {
     return this._sendRequest(this._methods.GET, uriPath, body);
   },
 
-  post: function (uriPath, body) {
+  post(uriPath, body) {
     return this._sendRequest(this._methods.POST, uriPath, body);
   },
 
-  put: function (uriPath, body) {
+  put(uriPath, body) {
     return this._sendRequest(this._methods.PUT, uriPath, body);
   },
 
-  del: function (uriPath, body) {
+  del(uriPath, body) {
     return this._sendRequest(this._methods.DELETE, uriPath, body);
   },
 
-  _sendRequest: function (method, uriPath, body) {
+  _sendRequest(method, uriPath, body) {
     const xmlHttp = util.createXmlHttpRequest();
     xmlHttp.open(method, this._apiLocation + uriPath, false);
 
@@ -70,7 +70,7 @@ const ApiUtil = {
     });
   },
 
-  _handleResponse: function (response) {
+  _handleResponse(response) {
     if (!response) {
       return null;
     }
@@ -85,15 +85,15 @@ const ApiUtil = {
 
   // ASYNC
 
-  postAsync: function (uriPath, body, preventBeforeAfter) {
+  postAsync(uriPath, body, preventBeforeAfter) {
     return this._sendRequestAsync(this._methods.POST, uriPath, body, preventBeforeAfter);
   },
 
-  getAsync: function (uriPath, body, preventBeforeAfter) {
+  getAsync(uriPath, body, preventBeforeAfter) {
     return this._sendRequestAsync(this._methods.GET, uriPath, body, preventBeforeAfter);
   },
 
-  _sendRequestAsync: function (method, uriPath, body, preventBeforeAfter) {
+  _sendRequestAsync(method, uriPath, body, preventBeforeAfter) {
     // block the user with the overlay
     const canCallBeforeAfter = preventBeforeAfter || (preventBeforeAfter === undefined);
     this._beforeSendRequest(canCallBeforeAfter);
@@ -163,16 +163,18 @@ const ApiUtil = {
       });
   },
 
-  _beforeSendRequest: function (canCallBeforeAfter) {
+  _beforeSendRequest(canCallBeforeAfter) {
     if (canCallBeforeAfter) {
-      util.show('submit-overlay');
+      util.show('appOverlay1');
+      util.show('appOverlay2');
       util.disableKeyDown();
     }
   },
 
-  _afterSendRequest: function (canCallBeforeAfter) {
+  _afterSendRequest(canCallBeforeAfter) {
     if (canCallBeforeAfter) {
-      util.hide('submit-overlay');
+      util.hide('appOverlay2');
+      util.hide('appOverlay1');
       util.resetKeyDown();
     }
   }

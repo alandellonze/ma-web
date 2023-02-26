@@ -1,24 +1,24 @@
 const util = {
 
-  id: function (id) {
+  id(id) {
     return document.getElementById(id);
   },
 
-  show: function (id, condition) {
+  show(id, condition) {
     const el = this.id(id);
     if (el) {
       el.style.display = condition === undefined || condition ? '' : 'none';
     }
   },
 
-  hide: function (id) {
+  hide(id) {
     const el = this.id(id);
     if (el) {
       el.style.display = 'none';
     }
   },
 
-  getValue: function (id) {
+  getValue(id) {
     const el = this.id(id);
     if (el) {
       if (el.tagName === 'INPUT') {
@@ -35,7 +35,7 @@ const util = {
     }
   },
 
-  setValue: function (id, value) {
+  setValue(id, value) {
     const el = this.id(id);
     if (el) {
       if (value === null || value === undefined) {
@@ -56,7 +56,7 @@ const util = {
     }
   },
 
-  emptyTable: function (id) {
+  emptyTable(id) {
     const el = this.id(id);
     if (el) {
       el.innerHTML = '';
@@ -64,31 +64,49 @@ const util = {
     return el;
   },
 
-  tr: function (parent) {
+  table(parent) {
+    const el = document.createElement('table');
+    if (parent) {
+      parent.appendChild(el);
+    }
+    return el;
+  },
+
+  tr(parent, className) {
     const el = document.createElement('tr');
     if (parent) {
       parent.appendChild(el);
     }
+    if (className) {
+      el.className = className;
+    }
     return el;
   },
 
-  td: function (content, onclick, parent) {
+  td(parent, content, className, onclick) {
     const el = document.createElement('td');
+    if (parent) {
+      parent.appendChild(el);
+    }
     if (content) {
       el.innerHTML = content;
+    }
+    if (className) {
+      el.className = className;
     }
     if (onclick) {
       el.onclick = onclick;
     }
-    if (parent) {
-      parent.appendChild(el);
-    }
     return el;
+  },
+
+  int2(i) {
+    return ('0' + i).slice(-2);
   },
 
   _TAG_NAMES: ['A', 'B', 'DIV', 'INPUT', 'LABEL', 'P', 'SPAN', 'TH'],
 
-  allByAttribute: function (attribute) {
+  allByAttribute(attribute) {
     const els = [];
     for (let t = 0; t < util._TAG_NAMES.length; t++) {
       const allEls = document.getElementsByTagName(util._TAG_NAMES[t]);
@@ -101,7 +119,7 @@ const util = {
     return els;
   },
 
-  createXmlHttpRequest: function () {
+  createXmlHttpRequest() {
     if (window.XMLHttpRequest) {
       return new XMLHttpRequest();
     }
@@ -116,7 +134,7 @@ const util = {
     }
   },
 
-  disableKeyboardCallback: function (e) {
+  disableKeyboardCallback(e) {
     e.returnValue = false;
     if (e.stopPropagation) {
       e.stopPropagation();
@@ -124,7 +142,7 @@ const util = {
     return false;
   },
 
-  disableKeyDown: function () {
+  disableKeyDown() {
     if (document.addEventListener) {
       document.addEventListener('keydown', util.disableKeyboardCallback, false);
     } else if (document.attachEvent) {
@@ -132,7 +150,7 @@ const util = {
     }
   },
 
-  resetKeyDown: function () {
+  resetKeyDown() {
     if (document.removeEventListener) {
       document.removeEventListener('keydown', util.disableKeyboardCallback);
     } else if (document.detachEvent) {
@@ -140,7 +158,7 @@ const util = {
     }
   },
 
-  preventEvent: function (event) {
+  preventEvent(event) {
     if (event) {
       event.returnValue = false;
       if (event.preventDefault)

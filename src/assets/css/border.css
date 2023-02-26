@@ -1,0 +1,19 @@
+.bt {
+    border-top: 1px SOLID #AAAAAA;
+}
+
+.br {
+    border-right: 1px SOLID #AAAAAA;
+}
+
+.bb {
+    border-bottom: 1px SOLID #AAAAAA;
+}
+
+.bl {
+    border-left: 1px SOLID #AAAAAA;
+}
+
+tr.bb td {
+    border-bottom: 1px SOLID #AAAAAA;
+}

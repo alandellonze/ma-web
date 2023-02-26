@@ -1,24 +1,24 @@
 const toast = {
 
-  ok: function (msg, timeout) {
+  ok(msg, timeout) {
     this._msg(msg, 'ok', timeout);
   },
 
-  warn: function (msg, timeout) {
+  warn(msg, timeout) {
     this._msg(msg, 'warn', timeout);
   },
 
-  ko: function (msg, timeout) {
+  ko(msg, timeout) {
     this._msg(msg, 'ko', timeout);
   },
 
-  _msg: function (msg, style, timeout) {
+  _msg(msg, style, timeout) {
     this._removeAll();
     const el = this._create(msg, style);
     this._timeout(el, timeout);
   },
 
-  _removeAll: function () {
+  _removeAll() {
     try {
       const list = document.getElementsByClassName('ts');
       for (let i = 0; i < list.length; i++) {
@@ -28,7 +28,7 @@ const toast = {
     }
   },
 
-  _create: function (msg, style) {
+  _create(msg, style) {
     const el = document.createElement('div');
     el.className = 'ts ' + style;
     el.innerHTML = labels.translate(msg);
@@ -36,14 +36,14 @@ const toast = {
     return el;
   },
 
-  _timeout: function (el, timeout) {
+  _timeout(el, timeout) {
     const t = setTimeout(function () {
       toast._remove(el);
       clearInterval(t);
     }, timeout ? timeout : 3000);
   },
 
-  _remove: function (el) {
+  _remove(el) {
     try {
       document.body.removeChild(el);
     } catch (e) {

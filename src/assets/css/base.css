@@ -7,13 +7,13 @@ html {
 }
 
 body {
-    margin: 0;
-    background-color: #FFFFFF;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11pt;
-    text-align: center;
     min-height: 100%;
-    position: relative;
+    margin: 0;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-size: small;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2C3E50;
 }
 
 form {

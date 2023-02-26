@@ -19,7 +19,6 @@
 }
 
 .bl-container table td {
-    text-align: left;
     padding: 5px 0 5px 10px;
     cursor: pointer;
     border-bottom: 1px SOLID #BBBBBB;
