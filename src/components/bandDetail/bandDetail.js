@@ -8,23 +8,29 @@ BandDetail.prototype = {
   mp3Diff: null,
   coversDiff: null,
   scansDiff: null,
+  selectedBand: null,
 
   _generate(id) {
     util.setValue(id, htmlStore.get('/components/bandDetail/bandDetail.html'));
 
     // init diff component
-    this.albumDiff = new AlbumDiff('bdAlbumDiff');
+    this.albumDiff = new AlbumDiff('bdAlbumDiff', this);
     this.mp3Diff = new StringDiff('bdMP3Diff');
     this.coversDiff = new StringDiff('bdCoversDiff');
     this.scansDiff = new StringDiff('bdScansDiff');
   },
 
   async update(selectedBand) {
+    this.selectedBand = selectedBand;
+    await this.reload();
+  },
+
+  async reload() {
     // load differences
-    const diff = await ApiService.getDiff(selectedBand.id);
+    const diff = await ApiService.getDiff(this.selectedBand.id);
 
     // update band name
-    util.setValue('bdName', selectedBand.name);
+    util.setValue('bdName', this.selectedBand.name);
 
     // update diff components
     this.albumDiff.update(diff.albums);

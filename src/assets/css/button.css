@@ -2,6 +2,7 @@
     background-color: #77FF77;
     border: none;
     border-radius: 2px;
+    cursor: pointer;
 }
 
 .bt-cancel {
@@ -9,4 +10,5 @@
     background: none;
     border: none;
     text-decoration: underline;
+    cursor: pointer;
 }

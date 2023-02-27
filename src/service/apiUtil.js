@@ -85,12 +85,16 @@ const ApiUtil = {
 
   // ASYNC
 
+  getAsync(uriPath, body, preventBeforeAfter) {
+    return this._sendRequestAsync(this._methods.GET, uriPath, body, preventBeforeAfter);
+  },
+
   postAsync(uriPath, body, preventBeforeAfter) {
     return this._sendRequestAsync(this._methods.POST, uriPath, body, preventBeforeAfter);
   },
 
-  getAsync(uriPath, body, preventBeforeAfter) {
-    return this._sendRequestAsync(this._methods.GET, uriPath, body, preventBeforeAfter);
+  delAsync(uriPath, body, preventBeforeAfter) {
+    return this._sendRequestAsync(this._methods.DELETE, uriPath, body, preventBeforeAfter);
   },
 
   _sendRequestAsync(method, uriPath, body, preventBeforeAfter) {

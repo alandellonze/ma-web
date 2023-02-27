@@ -51,7 +51,7 @@ StringDiff.prototype = {
     const tr = util.tr(table);
 
     // diffType
-    util.td(tr, this.DIFF_TYPE_MAP[diffType], 'bl ad-' + diffType);
+    util.td(tr, this.DIFF_TYPE_MAP[diffType], 'bl ac ad-' + diffType);
 
     // name
     util.td(tr, a);

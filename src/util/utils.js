@@ -139,9 +139,6 @@ const util = {
     return el;
   },
 
-  int2(i) {
-    return ('0' + i).slice(-2);
-  },
 
   _TAG_NAMES: ['A', 'B', 'DIV', 'INPUT', 'LABEL', 'P', 'SPAN', 'TH'],
 
@@ -156,6 +153,14 @@ const util = {
       }
     }
     return els;
+  },
+
+  int2(i) {
+    return ('0' + i).slice(-2);
+  },
+
+  getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
   },
 
   createXmlHttpRequest() {

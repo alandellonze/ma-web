@@ -11,8 +11,15 @@ BandList.prototype = {
 
     // bind events
     const self = this;
-    util.id('blFilter').onkeyup = async function () {
-      await self._loadBands();
+    let timeoutId;
+    util.id('blFilter').onkeydown = function () {
+      clearTimeout(timeoutId);
+    };
+    util.id('blFilter').onkeyup = function () {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(async function () {
+        await self._loadBands();
+      }, 250);
     };
   },
 
