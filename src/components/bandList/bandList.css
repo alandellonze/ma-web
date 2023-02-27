@@ -6,6 +6,7 @@
 
 .bl-container .bl-input {
     height: 40px;
+    text-align: center;
     background-color: darkcyan;
 }
 

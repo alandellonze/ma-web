@@ -27,8 +27,8 @@ const labels = {
     let translation = '';
 
     const texts = text.split(' ');
-    for (let j = 0; j < texts.length; j++) {
-      const t = texts[j];
+    for (let i = 0; i < texts.length; i++) {
+      const t = texts[i];
       translation += (this._values[t] === undefined ? t : this._values[t]) + ' ';
     }
 

@@ -64,32 +64,71 @@ const util = {
     return el;
   },
 
-  table(parent) {
-    const el = document.createElement('table');
-    if (parent) {
-      parent.appendChild(el);
+  table(parent, className, onclick) {
+    return this._el('table', parent, null, className, onclick);
+  },
+
+  tr(parent, className, onclick) {
+    return this._el('tr', parent, null, className, onclick);
+  },
+
+  td(parent, content, className, onclick, colSpan) {
+    const el = this._el('td', parent, content, className, onclick);
+    if (colSpan) {
+      el.colSpan = colSpan;
     }
     return el;
   },
 
-  tr(parent, className) {
-    const el = document.createElement('tr');
-    if (parent) {
-      parent.appendChild(el);
-    }
-    if (className) {
-      el.className = className;
+  text(parent, value, className, onclick) {
+    const el = this._el('input', parent, null, className, onclick);
+    el.type = 'text';
+    if (value) {
+      el.value = value;
     }
     return el;
   },
 
-  td(parent, content, className, onclick) {
-    const el = document.createElement('td');
+  button(parent, label, className, onclick) {
+    return this._el('button', parent, label, className, onclick);
+  },
+
+  select(parent, values, value, className, onclick) {
+    const el = this._el('select', parent, null, className, onclick);
+    if (values) {
+      this._options(el, values);
+    }
+    if (value) {
+      el.value = value;
+    }
+    return el;
+  },
+
+  _options(select, values) {
+    Object.keys(values).forEach(function (value) {
+      const key = values[value];
+      select.appendChild(util._option(key, value));
+    });
+  },
+
+  _option(key, value) {
+    const option = document.createElement('option');
+    option.value = key;
+    option.appendChild(document.createTextNode('(' + key + ') ' + labels.translate(value)));
+    return option;
+  },
+
+  _el(tagName, parent, content, className, onclick) {
+    const el = document.createElement(tagName);
     if (parent) {
       parent.appendChild(el);
     }
     if (content) {
-      el.innerHTML = content;
+      if (content.appendChild) {
+        el.appendChild(content);
+      } else {
+        el.innerHTML = content;
+      }
     }
     if (className) {
       el.className = className;

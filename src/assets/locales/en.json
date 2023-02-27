@@ -1,5 +1,9 @@
 {
   "app": "Metal Archives",
-  "v": "0.0.1",
-  "homeTitle": "Metal Archives"
+  "v": "0.0.3",
+  "homeTitle": "Metal Archives",
+  "NONE": "unknown",
+  "NOT_PRESENT": "not present",
+  "PRESENT": "present",
+  "TMP": "temporary"
 }

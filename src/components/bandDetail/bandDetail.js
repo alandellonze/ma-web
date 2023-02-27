@@ -31,6 +31,9 @@ BandDetail.prototype = {
     this.mp3Diff.update(diff.mp3);
     this.coversDiff.update(diff.covers);
     this.scansDiff.update(diff.scans);
+
+    // show data
+    util.show('bdContainer');
   }
 
 };

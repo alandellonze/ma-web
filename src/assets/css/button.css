@@ -1,0 +1,12 @@
+.bt-ok {
+    background-color: #77FF77;
+    border: none;
+    border-radius: 2px;
+}
+
+.bt-cancel {
+    color: #FF5252;
+    background: none;
+    border: none;
+    text-decoration: underline;
+}

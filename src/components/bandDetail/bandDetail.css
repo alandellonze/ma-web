@@ -1,10 +1,15 @@
 .bd-container {
-    padding: 10px;
     display: flex;
     flex-direction: column;
+}
+
+.bd-container .bd-header {
+    height: 40px;
+    text-align: center;
 }
 
 .bd-container .bd-content {
     display: flex;
     justify-content: space-around;
+    align-items: start;
 }

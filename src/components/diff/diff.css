@@ -1,13 +1,17 @@
+.ad-table tr:hover {
+    background-color: #EFEFEF;
+    color: #555555;
+    cursor: default;
+}
+
 .ad-table td {
     padding: 4px;
     border-right: 1px SOLID #AAAAAA;
     border-bottom: 1px SOLID #AAAAAA;
 }
 
-.ad-table tr:hover {
-    background-color: #EFEFEF;
-    color: #555555;
-    cursor: default;
+.ad-table td input {
+    border: none;
 }
 
 .ad-PLUS {
