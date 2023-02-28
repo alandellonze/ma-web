@@ -5,10 +5,15 @@
 
 .bd-container .bd-header {
     height: 40px;
-    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px SOLID #BBBBBB;
 }
 
 .bd-container .bd-content {
+    height: calc(100vh - 45px);
+    overflow: scroll;
     display: flex;
     justify-content: space-around;
     align-items: start;

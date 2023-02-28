@@ -64,6 +64,10 @@ const util = {
     return el;
   },
 
+  div(parent, content, className, onclick) {
+    return this._el('div', parent, content, className, onclick);
+  },
+
   table(parent, className, onclick) {
     return this._el('table', parent, null, className, onclick);
   },

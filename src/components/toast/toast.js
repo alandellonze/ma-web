@@ -29,11 +29,7 @@ const toast = {
   },
 
   _create(msg, style) {
-    const el = document.createElement('div');
-    el.className = 'ts ' + style;
-    el.innerHTML = labels.translate(msg);
-    document.body.appendChild(el);
-    return el;
+    return util.div(document.body, labels.translate(msg), 'ts ' + style);
   },
 
   _timeout(el, timeout) {

@@ -30,9 +30,7 @@ AlbumDiff.prototype = {
 
     // create header
     const tr = util.tr(table);
-    util.td(tr);
-    util.td(tr);
-    util.td(tr);
+    util.td(tr, null, null, null, 3);
     util.td(tr, changes + ' differences');
     util.td(tr);
     util.td(tr, 'DB');
@@ -112,6 +110,37 @@ AlbumDiff.prototype = {
     return tr;
   },
 
+  _addDiffTypeAction(tr, diffType, a, index) {
+    if (diffType !== 'EQUAL') {
+      let content;
+      let self = this;
+
+      switch (diffType) {
+        case 'MINUS':
+          content = util.button(null, '-', 'bt-cancel', async function (event) {
+            event.stopPropagation();
+            await ApiService.deleteAlbum(a.bandId, a.id);
+            self.bandDetail.reload();
+          });
+          break;
+
+        case 'PLUS':
+          content = util.button(null, '+', 'bt-ok', async function (event) {
+            event.stopPropagation();
+            await ApiService.saveAlbum(a);
+            self.bandDetail.reload();
+          });
+          break;
+
+        default:
+          content = this.DIFF_TYPE_MAP[diffType];
+          break;
+      }
+
+      util.td(tr, content, 'ac' + (index === 0 ? ' bt' : ''));
+    }
+  },
+
   _rowsChange(table, changes, diffType, original, revised) {
     let i = 0
 
@@ -127,10 +156,20 @@ AlbumDiff.prototype = {
 
     // add the remaining revised album (on the right side)
     if (i < revised.length) {
-      // FIXME empty rows
-      const tr = null;
       for (; i < revised.length; i++) {
-        this._rowRevised(tr, revised[i]);
+        const self = this;
+        const a = revised[i];
+
+        // action on row select
+        const tr = util.tr(table, 'ad-' + diffType, function () {
+          self._rowEdit(tr, diffType, a);
+        });
+
+        // add empty td
+        util.td(tr, null, null, null, 10);
+
+        // add the revised album (on the right side)
+        this._rowRevised(tr, a);
       }
     }
   },
@@ -193,7 +232,7 @@ AlbumDiff.prototype = {
     util.td(tr, position);
 
     // type
-    const type = this._addText(a, edited, 'type', 'w90');
+    const type = this._addText(a, edited, 'type', 'w95');
     util.td(tr, type);
 
     // typeCount
@@ -223,7 +262,7 @@ AlbumDiff.prototype = {
     util.td(tr);
 
     // type
-    const maType = this._addText(a, edited, 'maType', 'w90');
+    const maType = this._addText(a, edited, 'maType', 'w95');
     util.td(tr, maType);
 
     // typeCount
@@ -243,37 +282,6 @@ AlbumDiff.prototype = {
     util.td(tr, cancelButton, 'ac', null, 2);
 
     return tr;
-  },
-
-  _addDiffTypeAction(tr, diffType, a, index) {
-    if (diffType !== 'EQUAL') {
-      let content;
-      let self = this;
-
-      switch (diffType) {
-        case 'MINUS':
-          content = util.button(null, '-', 'bt-cancel', async function (event) {
-            event.stopPropagation();
-            await ApiService.deleteAlbum(a.bandId, a.id);
-            self.bandDetail.reload();
-          });
-          break;
-
-        case 'PLUS':
-          content = util.button(null, '+', 'bt-ok', async function (event) {
-            event.stopPropagation();
-            await ApiService.saveAlbum(a);
-            self.bandDetail.reload();
-          });
-          break;
-
-        default:
-          content = this.DIFF_TYPE_MAP[diffType];
-          break;
-      }
-
-      util.td(tr, content, 'ac' + (index === 0 ? ' bt' : ''));
-    }
   },
 
   _addText(a, edited, field, className) {

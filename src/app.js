@@ -1,11 +1,16 @@
 const app = {
 
+  version: '',
+
   init() {
     // init labels
     labels.init();
 
     // init router
     router.init();
+
+    // init version
+    version.init();
 
     // load page
     router.changePage(window.location.hash);

@@ -4,13 +4,13 @@
     margin: 6px 3px 3px 3px;
 }
 
-.bl-container .bl-input {
+.bl-container .bl-header {
     height: 40px;
     text-align: center;
     background-color: darkcyan;
 }
 
-.bl-container .bl-scroll {
+.bl-container .bl-content {
     height: calc(100vh - 45px);
     overflow: scroll;
 }

@@ -8,12 +8,18 @@ const gulp = require('gulp')
 const gulpIf = require('gulp-if')
 const htmlMin = require('gulp-htmlmin')
 const jsonminify = require('gulp-jsonminify')
+const packageJson = require('./package.json');
 const replace = require('gulp-replace')
 const uglify = require('gulp-uglify')
 
 
 // configuration
 const productionMode = argv.production || false
+
+const versionToBeReplaced = {
+  orig: "version: '',",
+  dest: "version: '" + packageJson.version + "',"
+}
 
 const uriToBeReplaced = {
   orig: "'http://' + window.location.hostname + ':8027'",
@@ -55,6 +61,7 @@ gulp.task('build:html', function () {
 gulp.task('build:js', function () {
   gulp.src(jsFiles)
     .pipe(concat('main.min.js'))
+    .pipe(replace(versionToBeReplaced.orig, versionToBeReplaced.dest))
     .pipe(gulpIf(productionMode, replace(uriToBeReplaced.orig, uriToBeReplaced.dest)))
     .pipe(gulpIf(productionMode,
       uglify({ mangle: true }).on('error', function (e) {

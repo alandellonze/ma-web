@@ -14,15 +14,15 @@ StringDiff.prototype = {
   id: null,
 
   update(delta) {
-    let changes = delta.changes
+    let changes = delta.changes;
 
     // create table
     const table = util.emptyTable(this.id);
 
     // create header
     const tr = util.tr(table);
-    util.td(tr);
     util.td(tr, changes + ' differences');
+    util.td(tr);
 
     // create rows
     delta.diffs.forEach(diff => {
@@ -44,17 +44,19 @@ StringDiff.prototype = {
   },
 
   _rows(table, diffType, albums) {
-    albums.forEach(album => this._row(table, diffType, album));
+    for (let i = 0; i < albums.length; i++) {
+      this._row(table, diffType, albums[i]);
+    }
   },
 
   _row(table, diffType, a) {
     const tr = util.tr(table);
 
-    // diffType
-    util.td(tr, this.DIFF_TYPE_MAP[diffType], 'bl ac ad-' + diffType);
-
     // name
-    util.td(tr, a);
+    util.td(tr, a, 'bl');
+
+    // diffType
+    util.td(tr, this.DIFF_TYPE_MAP[diffType], 'ac ad-' + diffType);
 
     return tr;
   },
@@ -74,9 +76,13 @@ StringDiff.prototype = {
 
     // add the remaining revised album (on the right side)
     if (i < revised.length) {
-      // FIXME empty rows
-      const tr = null;
       for (; i < revised.length; i++) {
+        const tr = util.tr(table, 'ad-' + diffType);
+
+        // add empty td
+        util.td(tr, null, null, null, 2);
+
+        // add the revised album (on the right side)
         this._rowRevised(tr, revised[i]);
       }
     }
