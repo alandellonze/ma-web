@@ -4,6 +4,10 @@
     cursor: default;
 }
 
+.ad-table tr.header:hover {
+    background-color: #FFFFFF;
+}
+
 .ad-table td {
     padding: 4px;
     border-right: 1px SOLID #AAAAAA;

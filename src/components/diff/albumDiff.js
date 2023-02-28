@@ -23,15 +23,13 @@ AlbumDiff.prototype = {
   bandDetail: null,
 
   update(delta) {
-    let changes = delta.changes;
-
     // create table
     const table = util.emptyTable(this.id);
 
     // create header
-    const tr = util.tr(table);
+    const tr = util.tr(table, 'header');
     util.td(tr, null, null, null, 3);
-    util.td(tr, changes + ' differences');
+    util.td(tr, delta.changes + ' differences');
     util.td(tr);
     util.td(tr, 'DB');
     util.td(tr, 'MP3');
@@ -51,7 +49,7 @@ AlbumDiff.prototype = {
           break
 
         case 'CHANGE':
-          this._rowsChange(table, changes, diff.type, diff.original, diff.revised);
+          this._rowsChange(table, delta.changes, diff.type, diff.original, diff.revised);
           break
       }
     });

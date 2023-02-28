@@ -1,5 +1,6 @@
-function StringDiff(id) {
+function StringDiff(id, kind) {
   this.id = id;
+  this.kind = kind;
 }
 
 StringDiff.prototype = {
@@ -12,16 +13,15 @@ StringDiff.prototype = {
   },
 
   id: null,
+  kind: null,
 
   update(delta) {
-    let changes = delta.changes;
-
     // create table
     const table = util.emptyTable(this.id);
 
     // create header
-    const tr = util.tr(table);
-    util.td(tr, changes + ' differences');
+    const tr = util.tr(table, 'header');
+    util.td(tr, this.kind + ' ' + delta.changes + ' differences');
     util.td(tr);
 
     // create rows
@@ -37,7 +37,7 @@ StringDiff.prototype = {
           break
 
         case 'CHANGE':
-          this._rowsChange(table, changes, diff.type, diff.original, diff.revised);
+          this._rowsChange(table, delta.changes, diff.type, diff.original, diff.revised);
           break
       }
     });
