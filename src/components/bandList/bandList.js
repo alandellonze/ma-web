@@ -4,6 +4,7 @@ function BandList(id) {
 
 BandList.prototype = {
 
+  bandSelected: null,
   bandDetail: null,
 
   _generate(id) {
@@ -50,11 +51,28 @@ BandList.prototype = {
     const tr = util.tr(table);
     util.td(tr, band.name, null, function () {
       self._selectBand(band);
-    });
+    }, null, 'band_' + band.id);
   },
 
   _selectBand(band) {
+    // refresh selection
+    this._refreshSelection(band);
+
+    // update detail
     this.bandDetail.update(band);
+  },
+
+  _refreshSelection(band) {
+    // remove selection on previous element
+    if (this.bandSelected) {
+      util.removeClass('band_' + this.bandSelected.id, 'bl-selected');
+    }
+
+    // add selection on next element
+    util.addClass('band_' + band.id, 'bl-selected');
+
+    // update element selected
+    this.bandSelected = band;
   }
 
 };

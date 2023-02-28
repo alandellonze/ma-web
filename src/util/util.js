@@ -76,10 +76,13 @@ const util = {
     return this._el('tr', parent, null, className, onclick);
   },
 
-  td(parent, content, className, onclick, colSpan) {
+  td(parent, content, className, onclick, colSpan, id) {
     const el = this._el('td', parent, content, className, onclick);
     if (colSpan) {
       el.colSpan = colSpan;
+    }
+    if (id) {
+      el.id = id;
     }
     return el;
   },
@@ -165,6 +168,20 @@ const util = {
 
   getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
+  },
+
+  addClass: function (id, className) {
+    const e = this.id(id);
+    if (e) {
+      e.classList.add(className);
+    }
+  },
+
+  removeClass: function (id, className) {
+    const e = this.id(id);
+    if (e) {
+      e.classList.remove(className);
+    }
   },
 
   createXmlHttpRequest() {

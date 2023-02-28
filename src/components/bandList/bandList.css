@@ -19,6 +19,10 @@
     width: 100%;
 }
 
+.bl-container table tr .bl-selected {
+    background-color: #53999b;
+}
+
 .bl-container table td {
     padding: 5px 0 5px 10px;
     cursor: pointer;
