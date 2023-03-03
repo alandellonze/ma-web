@@ -1,21 +1,17 @@
 const Home = {
 
-  data: null,
+  bandList: null,
+  bandDetail: null,
+  albumDetailModal: null,
 
-  _resetData() {
-    this.data = {};
-  },
-
-  async init() {
-    // reset
-    this._resetData();
-
+  init() {
     // create components
-    const bandList = new BandList('hmBandList');
-    const bandDetail = new BandDetail('hmBandDetail');
+    this.bandList = new BandList('hmBandList');
+    this.bandDetail = new BandDetail('hmBandDetail');
+    this.albumDetailModal = new AlbumDetailModal();
 
     // init bands
-    await bandList.init(bandDetail);
+    this.bandList.init();
   }
 
 };

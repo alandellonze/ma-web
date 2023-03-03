@@ -1,6 +1,5 @@
-function AlbumDiff(id, bandDetail) {
+function AlbumDiff(id) {
   this.id = id;
-  this.bandDetail = bandDetail;
 }
 
 AlbumDiff.prototype = {
@@ -20,7 +19,6 @@ AlbumDiff.prototype = {
   },
 
   id: null,
-  bandDetail: null,
 
   update(delta) {
     // create table
@@ -111,14 +109,13 @@ AlbumDiff.prototype = {
   _addDiffTypeAction(tr, diffType, a, index) {
     if (diffType !== 'EQUAL') {
       let content;
-      let self = this;
 
       switch (diffType) {
         case 'MINUS':
           content = util.button(null, '-', 'bt-cancel', async function (event) {
             event.stopPropagation();
             await ApiService.deleteAlbum(a.bandId, a.id);
-            self.bandDetail.reload();
+            Home.bandDetail.reload();
           });
           break;
 
@@ -126,7 +123,7 @@ AlbumDiff.prototype = {
           content = util.button(null, '+', 'bt-ok', async function (event) {
             event.stopPropagation();
             await ApiService.saveAlbum(a);
-            self.bandDetail.reload();
+            Home.bandDetail.reload();
           });
           break;
 
@@ -192,8 +189,6 @@ AlbumDiff.prototype = {
   // edit
 
   _rowEdit(tr, diffType, a) {
-    const self = this;
-
     // init edited object
     let edited = {
       id: a.id,
@@ -212,7 +207,7 @@ AlbumDiff.prototype = {
     const trEdit2 = this._rowEdit2(diffType, a, edited,
       async function () {
         await ApiService.saveAlbum(edited);
-        self.bandDetail.reload();
+        Home.bandDetail.reload();
       },
       function () {
         parentNode.removeChild(trEdit1);

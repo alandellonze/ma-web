@@ -5,7 +5,6 @@ function BandList(id) {
 BandList.prototype = {
 
   bandSelected: null,
-  bandDetail: null,
 
   _generate(id) {
     util.setValue(id, htmlStore.get('/components/bandList/bandList.html'));
@@ -24,10 +23,7 @@ BandList.prototype = {
     };
   },
 
-  async init(bandDetail) {
-    // set bandDetail component
-    this.bandDetail = bandDetail;
-
+  async init() {
     // init bands
     await this._loadBands();
   },
@@ -59,7 +55,7 @@ BandList.prototype = {
     this._refreshSelection(band);
 
     // update detail
-    this.bandDetail.update(band);
+    Home.bandDetail.update(band);
   },
 
   _refreshSelection(band) {

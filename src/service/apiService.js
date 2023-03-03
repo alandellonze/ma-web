@@ -14,6 +14,10 @@ const ApiService = {
 
   async deleteAlbum(bandId, albumId) {
     return ApiUtil.delAsync('/albums/' + bandId + '/' + albumId);
+  },
+
+  getMP3(albumId) {
+    return ApiUtil.getAsync('/mp3s/' + albumId);
   }
 
 };

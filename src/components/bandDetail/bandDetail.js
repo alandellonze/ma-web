@@ -15,9 +15,9 @@ BandDetail.prototype = {
 
     // init diff component
     this.albumDiff = new AlbumDiff('bdAlbumDiff', this);
-    this.mp3Diff = new StringDiff('bdMP3Diff', 'MP3');
-    this.coversDiff = new StringDiff('bdCoversDiff', 'Covers');
-    this.scansDiff = new StringDiff('bdScansDiff', 'Scans');
+    this.mp3Diff = new ItemDiff('bdMP3Diff', 'MP3');
+    this.coversDiff = new ItemDiff('bdCoversDiff', 'Covers');
+    this.scansDiff = new ItemDiff('bdScansDiff', 'Scans');
   },
 
   async update(selectedBand) {

@@ -36,7 +36,7 @@ const toast = {
     const t = setTimeout(function () {
       toast._remove(el);
       clearInterval(t);
-    }, timeout ? timeout : 3000);
+    }, timeout ? timeout : 4000);
   },
 
   _remove(el) {

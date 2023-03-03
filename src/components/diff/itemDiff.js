@@ -1,9 +1,9 @@
-function StringDiff(id, kind) {
+function ItemDiff(id, kind) {
   this.id = id;
   this.kind = kind;
 }
 
-StringDiff.prototype = {
+ItemDiff.prototype = {
 
   DIFF_TYPE_MAP: {
     'EQUAL': 'v',
@@ -50,10 +50,15 @@ StringDiff.prototype = {
   },
 
   _row(table, diffType, a) {
-    const tr = util.tr(table);
+    const self = this;
+
+    // action on row select
+    const tr = util.tr(table, null, function () {
+      self._openMP3(a);
+    });
 
     // name
-    util.td(tr, a, 'bl');
+    util.td(tr, a.name, 'bl');
 
     // diffType
     util.td(tr, this.DIFF_TYPE_MAP[diffType], 'ac ad-' + diffType);
@@ -90,7 +95,24 @@ StringDiff.prototype = {
 
   _rowRevised(tr, a, className) {
     // position
-    util.td(tr, a, className);
+    util.td(tr, a.name, className);
+  },
+
+  async _openMP3(a) {
+    // load album content
+    const mp3s = await ApiService.getMP3(a.albumId);
+
+    // message when nothing was found
+    if (mp3s.length === 0) {
+      toast.ko('"' + a.name + '": ' + labels.translate('nothingFound'));
+      return;
+    }
+
+    // open mp3 into a modal
+    Home.albumDetailModal.show({
+      album: a,
+      mp3s: mp3s
+    }, a.name);
   }
 
 };

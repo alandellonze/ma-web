@@ -4,8 +4,10 @@
     cursor: default;
 }
 
+.ad-table tr.header,
 .ad-table tr.header:hover {
     background-color: #FFFFFF;
+    color: #000000;
 }
 
 .ad-table td {

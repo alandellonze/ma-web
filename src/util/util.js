@@ -64,8 +64,8 @@ const util = {
     return el;
   },
 
-  div(parent, content, className, onclick) {
-    return this._el('div', parent, content, className, onclick);
+  div(parent, content, className, onclick, id) {
+    return this._el('div', parent, content, className, onclick, id);
   },
 
   table(parent, className, onclick) {
@@ -77,12 +77,9 @@ const util = {
   },
 
   td(parent, content, className, onclick, colSpan, id) {
-    const el = this._el('td', parent, content, className, onclick);
+    const el = this._el('td', parent, content, className, onclick, id);
     if (colSpan) {
       el.colSpan = colSpan;
-    }
-    if (id) {
-      el.id = id;
     }
     return el;
   },
@@ -125,7 +122,7 @@ const util = {
     return option;
   },
 
-  _el(tagName, parent, content, className, onclick) {
+  _el(tagName, parent, content, className, onclick, id) {
     const el = document.createElement(tagName);
     if (parent) {
       parent.appendChild(el);
@@ -142,6 +139,9 @@ const util = {
     }
     if (onclick) {
       el.onclick = onclick;
+    }
+    if (id) {
+      el.id = id;
     }
     return el;
   },

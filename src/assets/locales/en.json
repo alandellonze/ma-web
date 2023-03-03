@@ -1,7 +1,9 @@
 {
+  "error": "Error",
   "homeTitle": "Metal Archives",
   "NONE": "unknown",
   "NOT_PRESENT": "not present",
   "PRESENT": "present",
-  "TMP": "temporary"
+  "TMP": "temporary",
+  "nothingFound": "nothing found"
 }

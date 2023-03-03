@@ -76,7 +76,7 @@ const ApiUtil = {
     }
 
     if (response.status !== 200) {
-      toast.ko(labels.translate('apiLoadError') + ' ' + response.message);
+      toast.ko(labels.translate('error') + ': ' + response.status + ' ' + response.message);
       return null;
     }
 
@@ -157,7 +157,7 @@ const ApiUtil = {
       // catch
       .catch(function (xmlHttp) {
         // show failure message
-        toast.ko(labels.translate('apiLoadError') + ' ' + xmlHttp.responseText);
+        toast.ko(labels.translate('error') + ': ' + xmlHttp.status + ' ' + xmlHttp.responseText);
       })
 
       // finally

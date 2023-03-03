@@ -28,7 +28,7 @@ const uriToBeReplaced = {
 
 const buildPath = 'build'
 const htmlFiles = ['src/**/*.html']
-const jsFiles = ['src/**/**/*.js']
+const jsFiles = ['src/components/modal/*js', 'src/**/**/*.js']
 const cssFiles = ['src/**/**/*.css']
 const imgFiles = ['src/assets/images/**/*']
 const localeFiles = ['src/assets/locales/*.json']
