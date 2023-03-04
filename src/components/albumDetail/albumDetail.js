@@ -4,7 +4,35 @@ const AlbumDetail = {
     '9': 'Metal'
   },
 
-  init: function (data) {
+  init: function (mp3Folder) {
+    //  init album
+    this._initAlbum(mp3Folder.album, mp3Folder.cover);
+
+    // init mp3
+    if (mp3Folder.mp3s.length > 0) {
+      this._initMP3(mp3Folder.mp3s);
+    }
+  },
+
+  _initAlbum: function (a, cover) {
+    const table = util.id('adAlbum');
+
+    const tr1 = util.tr(table);
+    util.td(tr1, util.img(null, ApiService.buildCoverPath(cover), 'ad-img'));
+
+    /*
+    const tr2 = util.tr(table);
+    util.td(tr2, a.bandName);
+
+    const tr3 = util.tr(table);
+    util.td(tr3, albumUtil.type(a) + ' ' + albumUtil.typeCount(a));
+
+    const tr4 = util.tr(table);
+    util.td(tr4, albumUtil.name(a) + ' (' + a.year + ')');
+    */
+  },
+
+  _initMP3: function (mp3s) {
     const table = util.id('adMP3s');
 
     // header
@@ -20,12 +48,12 @@ const AlbumDetail = {
     util.td(tr, 'Bitrate');
 
     // rows
-    data.mp3s.forEach(mp3 => {
-      this._row(table, mp3);
+    mp3s.forEach(mp3 => {
+      this._rowMP3(table, mp3);
     });
   },
 
-  _row(table, mp3) {
+  _rowMP3(table, mp3) {
     const tr = util.tr(table);
     util.td(tr, mp3.fileName.substring(mp3.fileName.lastIndexOf('/') + 1), 'bl');
     util.td(tr, mp3.artist);

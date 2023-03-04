@@ -1,16 +1,26 @@
-.ad-mp3s tr:hover {
+.ad-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+}
+
+.ad-container .ad-img {
+    width: 500px;
+}
+
+.ad-container .ad-mp3s tr:hover {
     background-color: #EFEFEF;
     color: #555555;
     cursor: default;
 }
 
-.ad-mp3s tr.header,
-.ad-mp3s tr.header:hover {
+.ad-container .ad-mp3s tr.header,
+.ad-container .ad-mp3s tr.header:hover {
     background-color: gray;
     color: #FFFFFF;
 }
 
-.ad-mp3s td {
+.ad-container .ad-mp3s td {
     padding: 4px;
     border-right: 1px SOLID #AAAAAA;
     border-bottom: 1px SOLID #AAAAAA;

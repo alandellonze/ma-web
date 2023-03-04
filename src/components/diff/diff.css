@@ -1,49 +1,49 @@
-.ad-table tr:hover {
+.df-table tr:hover {
     background-color: #EFEFEF;
     color: #555555;
     cursor: default;
 }
 
-.ad-table tr.header,
-.ad-table tr.header:hover {
+.df-table tr.header,
+.df-table tr.header:hover {
     background-color: #FFFFFF;
     color: #000000;
 }
 
-.ad-table td {
+.df-table td {
     padding: 4px;
     border-right: 1px SOLID #AAAAAA;
     border-bottom: 1px SOLID #AAAAAA;
 }
 
-.ad-table td input {
+.df-table td input {
     border: none;
 }
 
-.ad-PLUS {
+.df-PLUS {
     background-color: #77FF77;
     color: #7777FF;
 }
 
-.ad-MINUS {
+.df-MINUS {
     background-color: #FF7777;
     color: #FFFF77;
 }
 
-.ad-CHANGE {
+.df-CHANGE {
     background-color: #EEECC0;
     color: #555555;
 }
 
-.ad-NOT_PRESENT {
+.df-NOT_PRESENT {
     background-color: #FF8686;
     color: #FFFF77;
 }
 
-.ad-PRESENT {
+.df-PRESENT {
     background-color: #40FCA7;
 }
 
-.ad-TMP {
+.df-TMP {
     background-color: #FFFF77;
 }

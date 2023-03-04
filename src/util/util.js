@@ -97,6 +97,12 @@ const util = {
     return this._el('button', parent, label, className, onclick);
   },
 
+  img(parent, src, className, onclick) {
+    const el = this._el('img', parent, null, className, onclick);
+    el.src = src;
+    return el;
+  },
+
   select(parent, values, value, className, onclick) {
     const el = this._el('select', parent, null, className, onclick);
     if (values) {

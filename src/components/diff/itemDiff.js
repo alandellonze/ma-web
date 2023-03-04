@@ -54,14 +54,14 @@ ItemDiff.prototype = {
 
     // action on row select
     const tr = util.tr(table, null, function () {
-      self._openMP3(a);
+      self._openAlbum(a);
     });
 
     // name
     util.td(tr, a.name, 'bl');
 
     // diffType
-    util.td(tr, this.DIFF_TYPE_MAP[diffType], 'ac ad-' + diffType);
+    util.td(tr, this.DIFF_TYPE_MAP[diffType], 'ac df-' + diffType);
 
     return tr;
   },
@@ -98,21 +98,16 @@ ItemDiff.prototype = {
     util.td(tr, a.name, className);
   },
 
-  async _openMP3(a) {
+  async _openAlbum(a) {
     // load album content
-    const mp3s = await ApiService.getMP3(a.albumId);
+    const mp3Folder = await ApiService.getMP3(a.albumId);
 
-    // message when nothing was found
-    if (mp3s.length === 0) {
-      toast.ko('"' + a.name + '": ' + labels.translate('nothingFound'));
-      return;
-    }
+    // build title
+    const album = mp3Folder.album;
+    const title = album.bandName + ' - ' + albumUtil.type(album, true) + albumUtil.typeCount(album) + ' - ' + albumUtil.name(album) + ' (' + album.year + ')';
 
-    // open mp3 into a modal
-    Home.albumDetailModal.show({
-      album: a,
-      mp3s: mp3s
-    }, a.name);
+    // open album into a modal
+    Home.albumDetailModal.show(mp3Folder, title);
   }
 
 };

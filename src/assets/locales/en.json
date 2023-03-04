@@ -5,5 +5,6 @@
   "NOT_PRESENT": "not present",
   "PRESENT": "present",
   "TMP": "temporary",
-  "nothingFound": "nothing found"
+  "close": "Close",
+  "apply": "OK"
 }

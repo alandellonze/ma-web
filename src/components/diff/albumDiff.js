@@ -63,7 +63,7 @@ AlbumDiff.prototype = {
     const self = this;
 
     // action on row select
-    const tr = util.tr(table, 'ad-' + diffType, function () {
+    const tr = util.tr(table, 'df-' + diffType, function () {
       self._rowEdit(tr, diffType, a);
     });
 
@@ -71,16 +71,13 @@ AlbumDiff.prototype = {
     util.td(tr, a.position, 'ar bl');
 
     // type
-    const type = a.maType ? '<i title="' + a.type + '">' + a.maType + '*</i>' : a.type;
-    util.td(tr, type);
+    util.td(tr, albumUtil.type(a));
 
     // typeCount
-    const typeCount = a.maTypeCount ? '<i title="' + util.int2(a.typeCount) + '">' + util.int2(a.maTypeCount) + '*</i>' : util.int2(a.typeCount);
-    util.td(tr, typeCount, 'ar');
+    util.td(tr, albumUtil.typeCount(a), 'ar');
 
     // name
-    const name = a.maName ? '<i title="' + a.name + '">' + a.maName + '*</i>' : a.name;
-    util.td(tr, name);
+    util.td(tr, albumUtil.name(a));
 
     // year
     util.td(tr, a.year, 'ar');
@@ -89,16 +86,16 @@ AlbumDiff.prototype = {
     const warningStatus = (a.status === 'PRESENT' && !['PRESENT', 'TMP'].includes(a.statusMP3)) || (a.status !== 'PRESENT' && ['PRESENT', 'TMP'].includes(a.statusMP3));
 
     // status db
-    util.td(tr, this.STATUS_MAP[a.status], 'ac ad-' + (warningStatus ? 'NOT_PRESENT' : (['PRESENT', 'TMP'].includes(a.status) ? a.status : '')));
+    util.td(tr, this.STATUS_MAP[a.status], 'ac df-' + (warningStatus ? 'NOT_PRESENT' : (['PRESENT', 'TMP'].includes(a.status) ? a.status : '')));
 
     // status mp3
-    util.td(tr, this.STATUS_MAP[a.statusMP3], 'ac ad-' + (warningStatus ? 'NOT_PRESENT' : (['PRESENT', 'TMP'].includes(a.statusMP3) ? a.statusMP3 : '')));
+    util.td(tr, this.STATUS_MAP[a.statusMP3], 'ac df-' + (warningStatus ? 'NOT_PRESENT' : (['PRESENT', 'TMP'].includes(a.statusMP3) ? a.statusMP3 : '')));
 
     // status cover
-    util.td(tr, this.STATUS_MAP[a.statusCover], 'ac ad-' + (a.statusCover === 'PRESENT' ? a.statusCover : ''));
+    util.td(tr, this.STATUS_MAP[a.statusCover], 'ac df-' + (a.statusCover === 'PRESENT' ? a.statusCover : ''));
 
     // status scans
-    util.td(tr, this.STATUS_MAP[a.statusScans], 'ac ad-' + (a.statusScans === 'PRESENT' ? a.statusScans : ''));
+    util.td(tr, this.STATUS_MAP[a.statusScans], 'ac df-' + (a.statusScans === 'PRESENT' ? a.statusScans : ''));
 
     // diffType
     this._addDiffTypeAction(tr, diffType, a, index);
@@ -156,7 +153,7 @@ AlbumDiff.prototype = {
         const a = revised[i];
 
         // action on row select
-        const tr = util.tr(table, 'ad-' + diffType, function () {
+        const tr = util.tr(table, 'df-' + diffType, function () {
           self._rowEdit(tr, diffType, a);
         });
 
@@ -218,7 +215,7 @@ AlbumDiff.prototype = {
   },
 
   _rowEdit1(diffType, a, edited) {
-    const tr = util.tr(null, 'ad-' + diffType);
+    const tr = util.tr(null, 'df-' + diffType);
 
     // position
     const position = this._addText(a, edited, 'position', 'ar w25');
@@ -251,7 +248,7 @@ AlbumDiff.prototype = {
   },
 
   _rowEdit2(diffType, a, edited, saveF, cancelF) {
-    const tr = util.tr(null, 'ad-' + diffType);
+    const tr = util.tr(null, 'df-' + diffType);
     util.td(tr);
 
     // type
