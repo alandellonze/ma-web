@@ -63,9 +63,7 @@ AlbumDiff.prototype = {
     const self = this;
 
     // action on row select
-    const tr = util.tr(table, 'df-' + diffType, function () {
-      self._rowEdit(tr, diffType, a);
-    });
+    const tr = util.tr(table, 'df-' + diffType, () => self._rowEdit(tr, diffType, a));
 
     // position
     util.td(tr, a.position, 'ar bl');
@@ -109,7 +107,7 @@ AlbumDiff.prototype = {
 
       switch (diffType) {
         case 'MINUS':
-          content = util.button(null, '-', 'bt-cancel', async function (event) {
+          content = util.button(null, '-', 'bt-cancel', async (event) => {
             event.stopPropagation();
             await ApiService.deleteAlbum(a.bandId, a.id);
             Home.bandDetail.reload();
@@ -117,7 +115,7 @@ AlbumDiff.prototype = {
           break;
 
         case 'PLUS':
-          content = util.button(null, '+', 'bt-ok', async function (event) {
+          content = util.button(null, '+', 'bt-ok', async (event) => {
             event.stopPropagation();
             await ApiService.saveAlbum(a);
             Home.bandDetail.reload();
@@ -153,9 +151,7 @@ AlbumDiff.prototype = {
         const a = revised[i];
 
         // action on row select
-        const tr = util.tr(table, 'df-' + diffType, function () {
-          self._rowEdit(tr, diffType, a);
-        });
+        const tr = util.tr(table, 'df-' + diffType, () => self._rowEdit(tr, diffType, a));
 
         // add empty td
         util.td(tr, null, null, null, 10);
@@ -202,11 +198,11 @@ AlbumDiff.prototype = {
 
     // create row edit 2
     const trEdit2 = this._rowEdit2(diffType, a, edited,
-      async function () {
+      async () => {
         await ApiService.saveAlbum(edited);
         Home.bandDetail.reload();
       },
-      function () {
+      () => {
         parentNode.removeChild(trEdit1);
         parentNode.removeChild(trEdit2);
         tr.style.display = 'revert';
@@ -282,9 +278,7 @@ AlbumDiff.prototype = {
     const text = util.text(null, a[field], className);
 
     // bind event
-    text.onkeyup = function () {
-      edited[field] = this.value === '' ? null : this.value;
-    };
+    text.onkeyup = () => edited[field] = this.value === '' ? null : this.value;
 
     return text;
   },
@@ -297,11 +291,9 @@ AlbumDiff.prototype = {
     const select = util.select(null, values, values[a[field]]);
 
     // bind event
-    select.onchange = function () {
-      edited[field] = util.getKeyByValue(values, this.value);
-    };
+    select.onchange = () => edited[field] = util.getKeyByValue(values, this.value);
 
-    return select
+    return select;
   }
 
 };

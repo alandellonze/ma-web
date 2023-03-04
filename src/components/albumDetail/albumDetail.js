@@ -4,17 +4,15 @@ const AlbumDetail = {
     '9': 'Metal'
   },
 
-  init: function (mp3Folder) {
+  init(mp3Folder) {
     //  init album
     this._initAlbum(mp3Folder.album, mp3Folder.cover);
 
     // init mp3
-    if (mp3Folder.mp3s.length > 0) {
-      this._initMP3(mp3Folder.mp3s);
-    }
+    this._initCDMP3s(mp3Folder.cdMP3Map);
   },
 
-  _initAlbum: function (a, cover) {
+  _initAlbum(a, cover) {
     const table = util.id('adAlbum');
 
     const tr1 = util.tr(table);
@@ -32,8 +30,27 @@ const AlbumDetail = {
     */
   },
 
-  _initMP3: function (mp3s) {
-    const table = util.id('adMP3s');
+  _initCDMP3s(cdMP3Map) {
+    const cds = Object.keys(cdMP3Map);
+    if (cds.length > 0) {
+      const parent = util.id('adMP3s');
+
+      const self = this;
+      cds.forEach((cd) => {
+        const mp3s = cdMP3Map[cd];
+        self._initCDMP3(parent, cd, mp3s);
+      });
+    }
+  },
+
+  _initCDMP3(parent, cd, mp3s) {
+    // cd name
+    if (cd.length > 0) {
+      util.div(parent, cd, 'pt10');
+    }
+
+    // create table
+    const table = util.table(parent);
 
     // header
     const tr = util.tr(table, 'header bt');
@@ -66,7 +83,7 @@ const AlbumDetail = {
     util.td(tr, mp3.bitrate);
   },
 
-  apply: function () {
+  apply() {
     return true;
   }
 

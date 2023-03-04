@@ -12,7 +12,7 @@ Modal.prototype = {
   _mouseListener: undefined,
   _keyListener: undefined,
 
-  show: function (data, title) {
+  show(data, title) {
     // add the modal to the page
     this._addModal(title);
 
@@ -42,7 +42,7 @@ Modal.prototype = {
     }
   },
 
-  _hide: function () {
+  _hide() {
     // remove listener
     document.removeEventListener('mousedown', this._mouseListener);
     document.removeEventListener('keyup', this._keyListener);
@@ -61,7 +61,7 @@ Modal.prototype = {
 
   // CREATE MODAL
 
-  _addModal: function (title) {
+  _addModal(title) {
     // generate the modal
     const modalId = ('' + Math.random()).replace('.', '');
     this._modalEl = util.div(document.body, this._buildModal(title), 'md-el', null, modalId);
@@ -76,7 +76,7 @@ Modal.prototype = {
     document.addEventListener('keyup', this._keyListener);
   },
 
-  _buildModal: function (title) {
+  _buildModal(title) {
     const content = util.div(null, null, 'md-content');
 
     // header
@@ -92,22 +92,18 @@ Modal.prototype = {
     return content;
   },
 
-  _buildFooter: function (content) {
+  _buildFooter(content) {
     const self = this;
 
     // footer container
     const footer = util.div(content, null, 'md-footer');
 
     // close button
-    util.button(footer, labels.translate('close'), 'md-button close', function () {
-      self._close();
-    });
+    util.button(footer, labels.translate('close'), 'md-button close', () => self._close());
 
     // apply button
     if (this.handler.apply) {
-      util.button(footer, labels.translate('apply'), 'md-button apply', function () {
-        self._apply();
-      });
+      util.button(footer, labels.translate('apply'), 'md-button apply', () => self._apply());
     }
 
     return footer;
@@ -115,18 +111,18 @@ Modal.prototype = {
 
   // LISTENER
 
-  _generateMouseListener: function () {
+  _generateMouseListener() {
     const self = this;
-    return function (event) {
+    return (event) => {
       if (event && event.srcElement && event.srcElement.id === self._modalEl.id) {
         self._hide();
       }
     }
   },
 
-  _generateKeyListener: function () {
+  _generateKeyListener() {
     const self = this;
-    return function (event) {
+    return (event) => {
       if (event && event.keyCode === 27) {
         self._hide();
       }

@@ -31,10 +31,5 @@ const app = {
 };
 
 // bind main events
-window.onload = function () {
-  app.init();
-};
-
-window.onkeyup = function (event) {
-  app.keyPressListener(event);
-};
+window.onload = () => app.init();
+window.onkeyup = (event) => app.keyPressListener(event);

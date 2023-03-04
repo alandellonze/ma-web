@@ -103,13 +103,13 @@ const ApiUtil = {
     this._beforeSendRequest(canCallBeforeAfter);
 
     // create the promise
-    const promise = new Promise(function (resolve, reject) {
+    const promise = new Promise((resolve, reject) => {
       // prepare the call
       const xmlHttp = util.createXmlHttpRequest();
       xmlHttp.open(method, ApiUtil._apiLocation + uriPath);
 
       // on success
-      xmlHttp.onload = function () {
+      xmlHttp.onload = () => {
         // success
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
           // get responseObj
@@ -135,9 +135,7 @@ const ApiUtil = {
       }
 
       // on error: reject
-      xmlHttp.onerror = function () {
-        reject(xmlHttp);
-      };
+      xmlHttp.onerror = () => reject(xmlHttp);
 
       // execute call
       try {
@@ -154,17 +152,11 @@ const ApiUtil = {
 
     // define common behaviours for the promise
     return promise
-      // catch
-      .catch(function (xmlHttp) {
-        // show failure message
-        toast.ko(labels.translate('error') + ': ' + xmlHttp.status + ' ' + xmlHttp.responseText);
-      })
+      // catch: show failure message
+      .catch((xmlHttp) => toast.ko(labels.translate('error') + ': ' + xmlHttp.status + ' ' + xmlHttp.responseText))
 
-      // finally
-      .finally(function () {
-        // unblock the user with the overlay
-        ApiUtil._afterSendRequest(canCallBeforeAfter);
-      });
+      // finally: unblock the user with the overlay
+      .finally(() => ApiUtil._afterSendRequest(canCallBeforeAfter));
   },
 
   _beforeSendRequest(canCallBeforeAfter) {

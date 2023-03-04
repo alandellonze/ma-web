@@ -53,9 +53,7 @@ ItemDiff.prototype = {
     const self = this;
 
     // action on row select
-    const tr = util.tr(table, null, function () {
-      self._openAlbum(a);
-    });
+    const tr = util.tr(table, null, () => self._openAlbum(a));
 
     // name
     util.td(tr, a.name, 'bl');

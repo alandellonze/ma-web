@@ -115,10 +115,7 @@ const util = {
   },
 
   _options(select, values) {
-    Object.keys(values).forEach(function (value) {
-      const key = values[value];
-      select.appendChild(util._option(key, value));
-    });
+    Object.keys(values).forEach((value) => select.appendChild(util._option(values[value], value)));
   },
 
   _option(key, value) {
@@ -176,14 +173,14 @@ const util = {
     return Object.keys(object).find(key => object[key] === value);
   },
 
-  addClass: function (id, className) {
+  addClass(id, className) {
     const e = this.id(id);
     if (e) {
       e.classList.add(className);
     }
   },
 
-  removeClass: function (id, className) {
+  removeClass(id, className) {
     const e = this.id(id);
     if (e) {
       e.classList.remove(className);

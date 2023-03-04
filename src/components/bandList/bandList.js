@@ -12,14 +12,10 @@ BandList.prototype = {
     // bind events
     const self = this;
     let timeoutId;
-    util.id('blFilter').onkeydown = function () {
+    util.id('blFilter').onkeydown = () => clearTimeout(timeoutId);
+    util.id('blFilter').onkeyup = () => {
       clearTimeout(timeoutId);
-    };
-    util.id('blFilter').onkeyup = function () {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(async function () {
-        await self._loadBands();
-      }, 250);
+      timeoutId = setTimeout(async () => await self._loadBands(), 250);
     };
   },
 
@@ -45,9 +41,7 @@ BandList.prototype = {
   _addRow(table, band) {
     const self = this;
     const tr = util.tr(table);
-    util.td(tr, band.name, null, function () {
-      self._selectBand(band);
-    }, null, 'band_' + band.id);
+    util.td(tr, band.name, null, () => self._selectBand(band), null, 'band_' + band.id);
   },
 
   _selectBand(band) {
