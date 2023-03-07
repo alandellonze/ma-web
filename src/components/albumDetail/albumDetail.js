@@ -33,7 +33,7 @@ const AlbumDetail = {
       const parent = util.id('adMP3s');
 
       const self = this;
-      cds.forEach((cd) => {
+      cds.forEach(cd => {
         const mp3s = cdMP3Map[cd];
         self._initCDMP3(parent, cd, mp3s);
       });
@@ -83,7 +83,7 @@ const AlbumDetail = {
     util.td(tr, mp3.bitrate);
 
     // draw issues when present
-    if (this._mp3HasOk(mp3) || this._mp3HasIssue(mp3)) {
+    if (this._mp3HasOk(mp3) || this._mp3HasIssues(mp3)) {
       this._rowMP3Issues(table, mp3);
     }
   },
@@ -92,8 +92,8 @@ const AlbumDetail = {
     return mp3.okTrack || mp3.okArtist || mp3.okTrack || mp3.okTitle || mp3.okAlbum || mp3.okYear || mp3.okGenre;
   },
 
-  _mp3HasIssue(mp3) {
-    return mp3.issueId3v1Tag || !mp3.issueId3v2Tag || mp3.issueCustomTag || mp3.itemsToBeCleared;
+  _mp3HasIssues(mp3) {
+    return mp3.issueId3v1Tag || !mp3.issueId3v2Tag || mp3.issueCustomTag || mp3.itemsToBeCleared || mp3.issueCover;
   },
 
   _rowMP3Issues(table, mp3) {
@@ -115,7 +115,7 @@ const AlbumDetail = {
     }
 
     // general issues
-    if (this._mp3HasIssue(mp3)) {
+    if (this._mp3HasIssues(mp3)) {
       let content = '';
       if (mp3.issueId3v1Tag) {
         content += '* ' + labels.translate('issueID3v1') + '<br/>';
@@ -130,6 +130,11 @@ const AlbumDetail = {
         content += '* ' + mp3.itemsToBeCleared;
       }
       util.td(tr, content, 'bt');
+
+      // cover issues
+      if (mp3.issueCover) {
+        util.td(tr, util.img(null, 'data:image/png;base64,' + mp3.originalCover, 'ad-img'), 'bt p0');
+      }
     }
   },
 

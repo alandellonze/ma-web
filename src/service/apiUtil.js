@@ -153,7 +153,7 @@ const ApiUtil = {
     // define common behaviours for the promise
     return promise
       // catch: show failure message
-      .catch((xmlHttp) => toast.ko(labels.translate('error') + ': ' + xmlHttp.status + ' ' + xmlHttp.responseText))
+      .catch(xmlHttp => toast.ko(labels.translate('error') + ': ' + xmlHttp.status + ' ' + xmlHttp.responseText))
 
       // finally: unblock the user with the overlay
       .finally(() => ApiUtil._afterSendRequest(canCallBeforeAfter));

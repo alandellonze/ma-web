@@ -107,7 +107,7 @@ AlbumDiff.prototype = {
 
       switch (diffType) {
         case 'MINUS':
-          content = util.button(null, '-', 'bt-cancel', async (event) => {
+          content = util.button(null, '-', 'bt-cancel', async event => {
             event.stopPropagation();
             await ApiService.deleteAlbum(a.bandId, a.id);
             Home.bandDetail.reload();
@@ -115,7 +115,7 @@ AlbumDiff.prototype = {
           break;
 
         case 'PLUS':
-          content = util.button(null, '+', 'bt-ok', async (event) => {
+          content = util.button(null, '+', 'bt-ok', async event => {
             event.stopPropagation();
             await ApiService.saveAlbum(a);
             Home.bandDetail.reload();
@@ -278,7 +278,7 @@ AlbumDiff.prototype = {
     const text = util.text(null, a[field], className);
 
     // bind event
-    text.onkeyup = () => edited[field] = this.value === '' ? null : this.value;
+    text.onkeyup = () => edited[field] = text.value === '' ? null : text.value;
 
     return text;
   },
@@ -291,7 +291,7 @@ AlbumDiff.prototype = {
     const select = util.select(null, values, values[a[field]]);
 
     // bind event
-    select.onchange = () => edited[field] = util.getKeyByValue(values, this.value);
+    select.onchange = () => edited[field] = util.getKeyByValue(values, select.value);
 
     return select;
   }

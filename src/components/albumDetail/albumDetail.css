@@ -39,3 +39,8 @@
     background-color: #F3EFEF;
     font-weight: bold;
 }
+
+.ad-container .ad-mp3-issues .ad-img {
+    width: 200px;
+    margin-bottom: -5px;
+}

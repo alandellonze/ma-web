@@ -115,7 +115,7 @@ const util = {
   },
 
   _options(select, values) {
-    Object.keys(values).forEach((value) => select.appendChild(util._option(values[value], value)));
+    Object.keys(values).forEach(value => select.appendChild(util._option(values[value], value)));
   },
 
   _option(key, value) {

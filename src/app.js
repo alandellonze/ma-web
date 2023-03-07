@@ -32,4 +32,4 @@ const app = {
 
 // bind main events
 window.onload = () => app.init();
-window.onkeyup = (event) => app.keyPressListener(event);
+window.onkeyup = event => app.keyPressListener(event);

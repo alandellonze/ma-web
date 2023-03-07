@@ -113,7 +113,7 @@ Modal.prototype = {
 
   _generateMouseListener() {
     const self = this;
-    return (event) => {
+    return event => {
       if (event && event.srcElement && event.srcElement.id === self._modalEl.id) {
         self._hide();
       }
@@ -122,7 +122,7 @@ Modal.prototype = {
 
   _generateKeyListener() {
     const self = this;
-    return (event) => {
+    return event => {
       if (event && event.keyCode === 27) {
         self._hide();
       }
