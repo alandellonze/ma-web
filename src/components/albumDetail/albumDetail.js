@@ -1,9 +1,5 @@
 const AlbumDetail = {
 
-  GENRE_MAP: {
-    '9': 'Metal'
-  },
-
   init(mp3Folder) {
     //  init album
     this._initAlbum(mp3Folder.album, mp3Folder.cover);
@@ -32,7 +28,8 @@ const AlbumDetail = {
 
   _initCDMP3s(cdMP3Map) {
     const cds = Object.keys(cdMP3Map);
-    if (cds.length > 0) {
+    const hasCDs = cds.length > 0;
+    if (hasCDs) {
       const parent = util.id('adMP3s');
 
       const self = this;
@@ -41,6 +38,9 @@ const AlbumDetail = {
         self._initCDMP3(parent, cd, mp3s);
       });
     }
+
+    // show / hide mp3s
+    util.show('adMP3s', hasCDs);
   },
 
   _initCDMP3(parent, cd, mp3s) {
@@ -79,8 +79,58 @@ const AlbumDetail = {
     util.td(tr, mp3.title);
     util.td(tr, mp3.duration);
     util.td(tr, mp3.year);
-    util.td(tr, this.GENRE_MAP[mp3.genre]);
+    util.td(tr, mp3.genre + (mp3.genreDescription ? ' (' + mp3.genreDescription + ')' : ''));
     util.td(tr, mp3.bitrate);
+
+    // draw issues when present
+    if (this._mp3HasOk(mp3) || this._mp3HasIssue(mp3)) {
+      this._rowMP3Issues(table, mp3);
+    }
+  },
+
+  _mp3HasOk(mp3) {
+    return mp3.okTrack || mp3.okArtist || mp3.okTrack || mp3.okTitle || mp3.okAlbum || mp3.okYear || mp3.okGenre;
+  },
+
+  _mp3HasIssue(mp3) {
+    return mp3.issueId3v1Tag || !mp3.issueId3v2Tag || mp3.issueCustomTag || mp3.itemsToBeCleared;
+  },
+
+  _rowMP3Issues(table, mp3) {
+    const tr = util.tr(table, 'ad-mp3-issues');
+
+    // tag differences
+    if (this._mp3HasOk(mp3)) {
+      util.td(tr, null, 'bl');
+      util.td(tr, mp3.okArtist ? mp3.okArtist : '');
+      util.td(tr, mp3.okAlbum ? mp3.okAlbum : '');
+      util.td(tr, mp3.okTrack ? mp3.okTrack : '');
+      util.td(tr, mp3.okTitle ? mp3.okTitle : '');
+      util.td(tr);
+      util.td(tr, mp3.okYear ? mp3.okYear : '');
+      util.td(tr, mp3.okGenre ? mp3.okGenre : '' + (mp3.okGenreDescription ? ' (' + mp3.okGenreDescription + ')' : ''));
+      util.td(tr);
+    } else {
+      util.td(tr, null, 'bl', null, 9);
+    }
+
+    // general issues
+    if (this._mp3HasIssue(mp3)) {
+      let content = '';
+      if (mp3.issueId3v1Tag) {
+        content += '* ' + labels.translate('issueID3v1') + '<br/>';
+      }
+      if (!mp3.issueId3v2Tag) {
+        content += '* ' + labels.translate('issueID3v2') + '<br/>';
+      }
+      if (mp3.issueCustomTag) {
+        content += '* ' + labels.translate('issueCustomTag') + '<br/>';
+      }
+      if (mp3.itemsToBeCleared) {
+        content += '* ' + mp3.itemsToBeCleared;
+      }
+      util.td(tr, content, 'bt');
+    }
   },
 
   apply() {

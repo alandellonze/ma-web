@@ -4,8 +4,17 @@
     align-items: start;
 }
 
-.ad-container .ad-img {
+.ad-container .ad-album {
+    position: sticky;
+    top: 65px;
+}
+
+.ad-container .ad-album .ad-img {
     width: 500px;
+}
+
+.ad-container .ad-mp3s {
+    padding-left: 20px;
 }
 
 .ad-container .ad-mp3s tr:hover {
@@ -21,7 +30,12 @@
 }
 
 .ad-container .ad-mp3s td {
-    padding: 4px;
+    padding: 5px;
     border-right: 1px SOLID #AAAAAA;
     border-bottom: 1px SOLID #AAAAAA;
+}
+
+.ad-container .ad-mp3-issues {
+    background-color: #F3EFEF;
+    font-weight: bold;
 }
