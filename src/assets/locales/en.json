@@ -9,5 +9,6 @@
   "apply": "OK",
   "issueID3v1": "ID3 v1 present",
   "issueID3v2": "ID3 v2 not present",
-  "issueCustomTag": "Custom tag present"
+  "issueCustomTag": "Custom tag present",
+  "issueCover": "Cover not present"
 }

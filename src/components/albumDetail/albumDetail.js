@@ -27,7 +27,7 @@ const AlbumDetail = {
   },
 
   _initCDMP3s(cdMP3Map) {
-    const cds = Object.keys(cdMP3Map);
+    const cds = Object.keys(cdMP3Map).sort();
     const hasCDs = cds.length > 0;
     if (hasCDs) {
       const parent = util.id('adMP3s');
@@ -46,11 +46,11 @@ const AlbumDetail = {
   _initCDMP3(parent, cd, mp3s) {
     // cd name
     if (cd.length > 0) {
-      util.div(parent, cd, 'pt10');
+      util.div(parent, cd, 'ad-cd');
     }
 
     // create table
-    const table = util.table(parent);
+    const table = util.table(parent, 'pb20');
 
     // header
     const tr = util.tr(table, 'header bt');
@@ -83,7 +83,7 @@ const AlbumDetail = {
     util.td(tr, mp3.bitrate);
 
     // draw issues when present
-    if (this._mp3HasOk(mp3) || this._mp3HasIssues(mp3)) {
+    if (this._mp3HasOk(mp3) || this._mp3HasIssues(mp3) || mp3.issueCover) {
       this._rowMP3Issues(table, mp3);
     }
   },
@@ -93,7 +93,7 @@ const AlbumDetail = {
   },
 
   _mp3HasIssues(mp3) {
-    return mp3.issueId3v1Tag || !mp3.issueId3v2Tag || mp3.issueCustomTag || mp3.itemsToBeCleared || mp3.issueCover;
+    return mp3.issueId3v1Tag || !mp3.issueId3v2Tag || mp3.issueCustomTag || mp3.itemsToBeCleared;
   },
 
   _rowMP3Issues(table, mp3) {
@@ -101,7 +101,7 @@ const AlbumDetail = {
 
     // tag differences
     if (this._mp3HasOk(mp3)) {
-      util.td(tr, null, 'bl');
+      util.td(tr, mp3.okFilename ? mp3.okFilename : '', 'bl');
       util.td(tr, mp3.okArtist ? mp3.okArtist : '');
       util.td(tr, mp3.okAlbum ? mp3.okAlbum : '');
       util.td(tr, mp3.okTrack ? mp3.okTrack : '');
@@ -130,11 +130,18 @@ const AlbumDetail = {
         content += '* ' + mp3.itemsToBeCleared;
       }
       util.td(tr, content, 'bt');
+    }
 
-      // cover issues
-      if (mp3.issueCover) {
-        util.td(tr, util.img(null, 'data:image/png;base64,' + mp3.originalCover, 'ad-img'), 'bt p0');
+    // cover issues
+    if (mp3.issueCover) {
+      const originalCoverPresent = mp3.originalCover.length > 0;
+      let coverContent;
+      if (originalCoverPresent) {
+        coverContent = util.img(null, 'data:image/png;base64,' + mp3.originalCover, 'ad-img');
+      } else {
+        coverContent = '* ' + labels.translate('issueCover');
       }
+      util.td(tr, coverContent, 'bt' + (originalCoverPresent ? ' p0' : ''));
     }
   },
 
