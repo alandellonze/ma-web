@@ -1,6 +1,10 @@
 const AlbumDetail = {
 
+  albumId: null,
+
   init(mp3Folder) {
+    this.albumId = mp3Folder.album.id;
+
     //  init album
     this._initAlbum(mp3Folder.album, mp3Folder.cover);
 
@@ -9,7 +13,7 @@ const AlbumDetail = {
   },
 
   _initAlbum(a, cover) {
-    const table = util.id('adAlbum');
+    const table = util.id('adAlbum', true);
 
     const tr1 = util.tr(table);
     util.td(tr1, util.img(null, ApiService.buildCoverPath(cover), 'ad-img'));
@@ -30,13 +34,9 @@ const AlbumDetail = {
     const cds = Object.keys(cdMP3Map).sort();
     const hasCDs = cds.length > 0;
     if (hasCDs) {
-      const parent = util.id('adMP3s');
-
       const self = this;
-      cds.forEach(cd => {
-        const mp3s = cdMP3Map[cd];
-        self._initCDMP3(parent, cd, mp3s);
-      });
+      const parent = util.id('adMP3s', true);
+      cds.forEach(cd => self._initCDMP3(parent, cd, cdMP3Map[cd]));
     }
 
     // show / hide mp3s
@@ -79,7 +79,7 @@ const AlbumDetail = {
     util.td(tr, mp3.title);
     util.td(tr, mp3.duration);
     util.td(tr, mp3.year);
-    util.td(tr, mp3.genre + (mp3.genreDescription ? ' (' + mp3.genreDescription + ')' : ''));
+    util.td(tr, mp3.genre + (mp3.genreDescription ? ' (' + mp3.genreDescription + ')' : ''), 'nowrap');
     util.td(tr, mp3.bitrate);
 
     // draw issues when present
@@ -89,11 +89,11 @@ const AlbumDetail = {
   },
 
   _mp3HasOk(mp3) {
-    return mp3.okTrack || mp3.okArtist || mp3.okTrack || mp3.okTitle || mp3.okAlbum || mp3.okYear || mp3.okGenre;
+    return mp3.okFilename || mp3.okArtist || mp3.okAlbum || mp3.okTrack || mp3.okTitle || mp3.okYear || mp3.okGenre;
   },
 
   _mp3HasIssues(mp3) {
-    return mp3.issueId3v1Tag || !mp3.issueId3v2Tag || mp3.issueCustomTag || mp3.itemsToBeCleared;
+    return mp3.issueId3v1Tag || mp3.issueId3v2Tag || mp3.issueCustomTag || mp3.itemsToBeCleared;
   },
 
   _rowMP3Issues(table, mp3) {
@@ -108,7 +108,7 @@ const AlbumDetail = {
       util.td(tr, mp3.okTitle ? mp3.okTitle : '');
       util.td(tr);
       util.td(tr, mp3.okYear ? mp3.okYear : '');
-      util.td(tr, mp3.okGenre ? mp3.okGenre : '' + (mp3.okGenreDescription ? ' (' + mp3.okGenreDescription + ')' : ''));
+      util.td(tr, mp3.okGenre ? mp3.okGenre : '' + (mp3.okGenreDescription ? ' (' + mp3.okGenreDescription + ')' : ''), 'nowrap');
       util.td(tr);
     } else {
       util.td(tr, null, 'bl', null, 9);
@@ -120,7 +120,7 @@ const AlbumDetail = {
       if (mp3.issueId3v1Tag) {
         content += '* ' + labels.translate('issueID3v1') + '<br/>';
       }
-      if (!mp3.issueId3v2Tag) {
+      if (mp3.issueId3v2Tag) {
         content += '* ' + labels.translate('issueID3v2') + '<br/>';
       }
       if (mp3.issueCustomTag) {
@@ -145,8 +145,12 @@ const AlbumDetail = {
     }
   },
 
-  apply() {
-    return true;
+  async apply() {
+    // apply and reload page
+    this.init(await ApiService.applyChangesMP3(this.albumId));
+
+    // do not close the modal
+    return false;
   }
 
 };

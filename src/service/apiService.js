@@ -20,6 +20,10 @@ const ApiService = {
     return ApiUtil.getAsync('/mp3s/' + albumId);
   },
 
+  applyChangesMP3(albumId) {
+    return ApiUtil.postAsync('/mp3s/' + albumId);
+  },
+
   buildCoverPath(cover) {
     return ApiUtil._apiLocation + '/covers/' + cover;
   }

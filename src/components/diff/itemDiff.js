@@ -17,7 +17,7 @@ ItemDiff.prototype = {
 
   update(delta) {
     // create table
-    const table = util.emptyTable(this.id);
+    const table = util.id(this.id,true);
 
     // create header
     const tr = util.tr(table, 'header');
@@ -59,7 +59,7 @@ ItemDiff.prototype = {
     util.td(tr, a.name, 'bl');
 
     // diffType
-    util.td(tr, this.DIFF_TYPE_MAP[diffType], 'ac df-' + diffType);
+    util.td(tr, this.DIFF_TYPE_MAP[diffType], 'ac df-i-' + diffType);
 
     return tr;
   },

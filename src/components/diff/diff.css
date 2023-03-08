@@ -20,30 +20,38 @@
     border: none;
 }
 
-.df-PLUS {
+.df-a-PLUS {
     background-color: #77FF77;
     color: #7777FF;
 }
 
-.df-MINUS {
+.df-a-MINUS {
     background-color: #FF7777;
     color: #FFFF77;
 }
 
-.df-CHANGE {
+.df-a-CHANGE {
     background-color: #EEECC0;
     color: #555555;
 }
 
-.df-NOT_PRESENT {
+.df-a-NOT_PRESENT {
     background-color: #FF8686;
     color: #FFFF77;
 }
 
-.df-PRESENT {
+.df-a-PRESENT {
     background-color: #40FCA7;
 }
 
-.df-TMP {
+.df-a-TMP {
     background-color: #FFFF77;
+}
+
+.df-i-EQUAL {
+    background-color: #40FCA7;
+}
+
+.df-i-PLUS {
+    background-color: #FF7777;
 }

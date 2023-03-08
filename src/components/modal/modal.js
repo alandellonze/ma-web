@@ -25,24 +25,24 @@ Modal.prototype = {
     }
   },
 
-  _close() {
+  async _close() {
     // callback for close action
     if (this.handler.onClose) {
-      this.handler.onClose();
+      await this.handler.onClose();
     }
 
     // hide modal
-    this._hide();
+    await this._hide();
   },
 
-  _apply() {
+  async _apply() {
     // callback for apply action
-    if (this.handler.apply()) {
-      this._hide();
+    if (await this.handler.apply()) {
+      await this._hide();
     }
   },
 
-  _hide() {
+  async _hide() {
     // remove listener
     document.removeEventListener('mousedown', this._mouseListener);
     document.removeEventListener('keyup', this._keyListener);
@@ -55,7 +55,7 @@ Modal.prototype = {
 
     // callback for on hide action
     if (this.handler.onHide) {
-      this.handler.onHide();
+      await this.handler.onHide();
     }
   },
 
@@ -113,18 +113,18 @@ Modal.prototype = {
 
   _generateMouseListener() {
     const self = this;
-    return event => {
+    return async event => {
       if (event && event.srcElement && event.srcElement.id === self._modalEl.id) {
-        self._hide();
+        await self._hide();
       }
     }
   },
 
   _generateKeyListener() {
     const self = this;
-    return event => {
+    return async event => {
       if (event && event.keyCode === 27) {
-        self._hide();
+        await self._hide();
       }
     }
   }

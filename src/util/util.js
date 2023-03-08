@@ -1,7 +1,11 @@
 const util = {
 
-  id(id) {
-    return document.getElementById(id);
+  id(id, empty) {
+    const el = document.getElementById(id);
+    if (el && empty) {
+      el.innerHTML = '';
+    }
+    return el;
   },
 
   show(id, condition) {
@@ -54,14 +58,6 @@ const util = {
         el.innerHTML = value;
       }
     }
-  },
-
-  emptyTable(id) {
-    const el = this.id(id);
-    if (el) {
-      el.innerHTML = '';
-    }
-    return el;
   },
 
   div(parent, content, className, onclick, id) {

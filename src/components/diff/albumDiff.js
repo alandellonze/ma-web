@@ -22,7 +22,7 @@ AlbumDiff.prototype = {
 
   update(delta) {
     // create table
-    const table = util.emptyTable(this.id);
+    const table = util.id(this.id,true);
 
     // create header
     const tr = util.tr(table, 'header');
@@ -63,7 +63,7 @@ AlbumDiff.prototype = {
     const self = this;
 
     // action on row select
-    const tr = util.tr(table, 'df-' + diffType, () => self._rowEdit(tr, diffType, a));
+    const tr = util.tr(table, 'df-a-' + diffType, () => self._rowEdit(tr, diffType, a));
 
     // position
     util.td(tr, a.position, 'ar bl');
@@ -84,16 +84,16 @@ AlbumDiff.prototype = {
     const warningStatus = (a.status === 'PRESENT' && !['PRESENT', 'TMP'].includes(a.statusMP3)) || (a.status !== 'PRESENT' && ['PRESENT', 'TMP'].includes(a.statusMP3));
 
     // status db
-    util.td(tr, this.STATUS_MAP[a.status], 'ac df-' + (warningStatus ? 'NOT_PRESENT' : (['PRESENT', 'TMP'].includes(a.status) ? a.status : '')));
+    util.td(tr, this.STATUS_MAP[a.status], 'ac df-a-' + (warningStatus ? 'NOT_PRESENT' : (['PRESENT', 'TMP'].includes(a.status) ? a.status : '')));
 
     // status mp3
-    util.td(tr, this.STATUS_MAP[a.statusMP3], 'ac df-' + (warningStatus ? 'NOT_PRESENT' : (['PRESENT', 'TMP'].includes(a.statusMP3) ? a.statusMP3 : '')));
+    util.td(tr, this.STATUS_MAP[a.statusMP3], 'ac df-a-' + (warningStatus ? 'NOT_PRESENT' : (['PRESENT', 'TMP'].includes(a.statusMP3) ? a.statusMP3 : '')));
 
     // status cover
-    util.td(tr, this.STATUS_MAP[a.statusCover], 'ac df-' + (a.statusCover === 'PRESENT' ? a.statusCover : ''));
+    util.td(tr, this.STATUS_MAP[a.statusCover], 'ac df-a-' + (a.statusCover === 'PRESENT' ? a.statusCover : ''));
 
     // status scans
-    util.td(tr, this.STATUS_MAP[a.statusScans], 'ac df-' + (a.statusScans === 'PRESENT' ? a.statusScans : ''));
+    util.td(tr, this.STATUS_MAP[a.statusScans], 'ac df-a-' + (a.statusScans === 'PRESENT' ? a.statusScans : ''));
 
     // diffType
     this._addDiffTypeAction(tr, diffType, a, index);
@@ -151,7 +151,7 @@ AlbumDiff.prototype = {
         const a = revised[i];
 
         // action on row select
-        const tr = util.tr(table, 'df-' + diffType, () => self._rowEdit(tr, diffType, a));
+        const tr = util.tr(table, 'df-a-' + diffType, () => self._rowEdit(tr, diffType, a));
 
         // add empty td
         util.td(tr, null, null, null, 10);
@@ -211,7 +211,7 @@ AlbumDiff.prototype = {
   },
 
   _rowEdit1(diffType, a, edited) {
-    const tr = util.tr(null, 'df-' + diffType);
+    const tr = util.tr(null, 'df-a-' + diffType);
 
     // position
     const position = this._addText(a, edited, 'position', 'ar w25');
@@ -244,7 +244,7 @@ AlbumDiff.prototype = {
   },
 
   _rowEdit2(diffType, a, edited, saveF, cancelF) {
-    const tr = util.tr(null, 'df-' + diffType);
+    const tr = util.tr(null, 'df-a-' + diffType);
     util.td(tr);
 
     // type

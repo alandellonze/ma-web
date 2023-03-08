@@ -32,7 +32,7 @@ BandList.prototype = {
 
   _updateBands(bands) {
     // empty table
-    const table = util.emptyTable('blTable');
+    const table = util.id('blTable',true);
 
     // add rows
     bands.forEach(band => this._addRow(table, band));
